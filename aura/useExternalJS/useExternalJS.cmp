@@ -1,0 +1,21 @@
+<aura:component description="useExternalJS" implements="force:lightningQuickActionWithoutHeader">
+    <ltng:require scripts="{!$Resource.externalJSFile}"></ltng:require>
+    <aura:attribute name="title" type="String" default="Use external JS"/>
+
+    <lightning:card>
+        <aura:set attribute="title">
+            <lightning:icon iconName="utility:connected_apps" size="small"/>
+            {! v.title}
+        </aura:set>
+        <aura:set attribute="footer">
+            <div  class="slds-p-around_medium container lgc-bg">
+                <lightning:button variant="brand-outline" label="Close" onclick="{!c.closeAction}" />
+                <lightning:button variant="brand" label="Say Hello" onclick="{!c.handleHello}" />
+                <lightning:button variant="brand" label="Calculate square" onclick="{!c.handleSquare}" />
+            </div>
+        </aura:set>
+        <div>
+            <lightning:input type="number" name="input" aura:id="inputNumber" label="Number to square" placeholder="enter number..."/>
+        </div>
+    </lightning:card>
+</aura:component>
