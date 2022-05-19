@@ -1,0 +1,11 @@
+<template>
+    <div onclick={selectBoat} class={tileClass}>
+        <div style={backgroundStyle} class="tile"></div>
+        <div class="lower-third">
+            <slot name="boatName"></slot>
+            <slot name="boatOwner"></slot>
+            <slot name="boatPrice"></slot>
+            <slot name="boatLength"></slot>
+        </div>
+    </div>
+</template>

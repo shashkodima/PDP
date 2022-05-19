@@ -1,0 +1,50 @@
+<template>
+    <lightning-tabset variant="scoped">
+        <lightning-tab label="Gallery">
+            <template if:true={boats}>
+                <div class="slds-scrollable_y">
+                    <lightning-layout class='slds-grid_align-center' multiple-rows="true">
+                        <template for:each={boats} for:item="boat">
+                            <lightning-layout-item key={boat.Id} padding="around-small" size="12" small-device-size="6" medium-device-size="4" large-device-size="3">
+                                <c-boat-tile
+                                        boat={boat}
+                                        onboatselect={updateSelectedTile}
+                                        selected-boat-id={selectedBoatId}
+                                        boat-picture={boat.Picture__c}
+                                >
+                                    <span slot="boatName">
+                                        <h1 class="slds-truncate slds-text-heading_medium">
+                                            {label.NAME_LABEL} : {boat.Name}
+                                        </h1>
+                                    </span>
+                                    <span slot="boatOwner">
+                                        <h2 class="slds-truncate slds-text-heading_small">
+                                            {label.OWNER_LABEL} : {boat.Contact__r.Name}
+                                        </h2>
+                                    </span>
+                                    <span slot="boatPrice">
+                                        <div class="slds-text-body_small">
+                                            {label.PRICE_LABEL} :
+                                            <lightning-formatted-number
+                                                    value={boat.Price__c}
+                                                    maximum-fraction-digits="2"
+                                            ></lightning-formatted-number>
+                                        </div>
+                                    </span>
+                                    <span slot="boatLength">
+                                        <div class="slds-text-body_small">
+                                            {label.LENGTH_LABEL} : {boat.Length__c}
+                                        </div>
+                                    </span>
+                                </c-boat-tile>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+            </template>
+        </lightning-tab>
+        <lightning-tab label="Boats Near Me">
+            <c-boats-near-me></c-boats-near-me>
+        </lightning-tab>
+    </lightning-tabset>
+</template>
