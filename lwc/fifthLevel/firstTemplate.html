@@ -1,0 +1,36 @@
+<template>
+    <lightning-card>
+        <lightning-input
+                slot="actions"
+                type="checkbox"
+                label="Alternative Button"
+                onchange={changeTemplate}
+        ></lightning-input>
+        <lightning-layout class="slds-align_absolute-center">
+            <lightning-layout-item class="slds-p-around_medium">
+                <lightning-button
+                        variant="brand"
+                        label="Test bubble"
+                        title="Test bubble"
+                        onclick={handleClick}
+                ></lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-p-around_medium">
+                <lightning-button
+                        variant="brand"
+                        label="Test extend"
+                        title="Test extend"
+                        onclick={showToastExtendTest}
+                ></lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-p-around_medium">
+                <lightning-button
+                        variant="brand"
+                        label="Test continuation"
+                        title="Test continuation"
+                        onclick={sendContinuation}
+                ></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>
