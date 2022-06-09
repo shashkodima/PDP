@@ -1,0 +1,49 @@
+<apex:page id="chartPDP" controller="ChartControllerPDP">
+
+    <apex:pageBlock title="Charts PDP">
+        <apex:pageBlockSection title="Contract By Year">
+
+            <apex:outputPanel id="chart">
+                <apex:chart data="{!ChartData}" theme="Category3" height="400" width="1000">
+                    <apex:legend position="left" font="bold 14px Helvetica"/>
+                    <apex:axis type="Numeric"
+                            position="left"
+                            title="Amount"
+                            grid="true"
+                            fields="contractAmountFinished,contractAmountOtherStatus"
+                            minimum="0"
+                            maximum="5000"
+                            steps="9"
+                            dashSize="2">
+                        <apex:chartLabel />
+                    </apex:axis>
+                    <apex:axis type="Category"
+                            position="bottom"
+                            fields="month"
+                            title="month">
+                        <apex:chartLabel />
+                    </apex:axis>
+                    <apex:barSeries orientation="vertical"
+                            axis="left"
+                            title="Finished, Other"
+                            xField="month"
+                            yField="contractAmountFinished,contractAmountOtherStatus"
+                            stacked="true"/>
+                </apex:chart>
+            </apex:outputPanel>
+
+            <apex:form >
+                <apex:selectList value="{!year}" size="1" title="Year">
+                    <apex:selectOptions value="{!chartYearOptions}"/>
+                    <apex:actionSupport event="onchange"
+                            reRender="chart"
+                            status="actionStatusDisplay"/>
+                </apex:selectList>
+                <apex:actionStatus id="actionStatusDisplay"
+                        startText="loading..."
+                        stopText=""/>
+            </apex:form>
+
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,15 @@
+<apex:page id="SendEmailPagePDP" standardController="Contact" extensions="SendEmailVFController" lightningStylesheets="true">
+    <apex:messages />
+    <apex:pageBlock title="New email for {!contact.Name}">
+        <br/>
+        <apex:form >
+            <apex:outputLabel value="Subject" for="EmailSubject"/>:<br />
+            <apex:inputText value="{!subject}" id="EmailSubject" maxlength="500"/>
+            <br /><br />
+            <apex:outputLabel value="Body" for="EmailBody"/>:<br />
+            <apex:inputTextarea value="{!body}" id="Body"  rows="10" cols="80"/>
+            <br /><br /><br />
+            <apex:commandButton value="Send Email" action="{!sendEmail}" />
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

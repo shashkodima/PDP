@@ -1,0 +1,16 @@
+<apex:page id="DynamicBindingFieldSet" standardController="Contract" extensions="DynamicBindingController">
+    <apex:pageBlock title="Dynamic Binding FieldSet">
+        <apex:pageBlockSection title="Dynamic Binding FieldSet">
+            <apex:repeat value="{!fieldsFromFieldSet}" var="field">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!field.Label}"/>
+                    <apex:outputText value="{!Contract[field]}"/>
+                </apex:pageBlockSectionItem>
+            </apex:repeat>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+    <apex:pageBlock title="Dynamic Component">
+        <apex:dynamicComponent componentValue="{!section}"/>
+    </apex:pageBlock>
+</apex:page>

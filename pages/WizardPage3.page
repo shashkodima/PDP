@@ -1,0 +1,30 @@
+<apex:page id="WizardPage3" controller="WizardController" tabStyle="Account" lightningStylesheets="true" applyBodyTag="false">
+    <apex:sectionHeader title="PDP Wizard" subtitle="Step 3 of 3"/>
+    <apex:slds />
+    <apex:form >
+        <apex:pageBlock title="Preview">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton styleClass="slds-vf-button_neutral" action="{!cancel}" value="Cancel"/>
+                <apex:commandButton styleClass="slds-vf-button_neutral" action="{!accountPage}" value="First"/>
+                <apex:commandButton styleClass="slds-vf-button_neutral" action="{!contactPage}" value="Previous"/>
+                <apex:commandButton styleClass="slds-vf-button_brand" action="{!save}" value="Save"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account Information">
+                <apex:outputField value="{!account.Name}"/>
+                <apex:outputField value="{!account.Phone}"/>
+                <apex:outputField value="{!account.BillingPostalCode}"/>
+                <apex:outputField value="{!account.Industry}"/>
+                <apex:outputField value="{!account.ShippingPostalCode}"/>
+                <apex:outputField value="{!account.Description}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Contact Information">
+                <apex:outputField value="{!contact.FirstName}"/>
+                <apex:outputField value="{!contact.LastName}"/>
+                <apex:outputField value="{!contact.Phone}"/>
+                <apex:outputField value="{!contact.Birthdate}"/>
+                <apex:outputField value="{!contact.Languages__c}"/>
+                <apex:outputField value="{!contact.Description}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

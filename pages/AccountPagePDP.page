@@ -1,0 +1,104 @@
+<apex:page id="AccountPagePDP" standardController="Account" extensions="ControllerExtensionPDP">
+    <apex:stylesheet value="{!$Resource.testStyle}"/>
+    <script>
+        function sayHello() {
+            console.log('Hello');
+        }
+    </script>
+
+    <apex:pageBlock title="Simple Variables and Formulas">
+        <apex:pageBlockSection columns="1">
+            <div>I am {!$User.FirstName} {!$User.LastName} ({!$User.Username})</div>
+            <div>My  Profile : {!$Profile.Name}</div>
+            <div>{!IF(($Profile.Name == 'System Administrator'), 'I`m God of this Page', 'I`m can`t do nothing')}</div>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+    <apex:pageBlock title="Account Standard Controller">
+        <apex:pageBlockSection columns="1">
+            <div>Account Name :  {!Account.Name}</div>
+            <div>Phone : {!Account.Phone}</div>
+            <div>I was created by : {!Account.Owner.Name}</div>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+    <apex:pageBlock title="Records, Fields, and Tables">
+        <apex:pageBlockSection columns="1" title="Record detail display">
+            <apex:detail relatedList="false"/>
+            <apex:relatedList list="Opportunities" pageSize="5"/>
+        </apex:pageBlockSection>
+
+        <apex:pageBlockSection title="Display individual fields">
+            <apex:outputField value="{!Account.Name}"/>
+            <apex:outputField value="{!Account.Phone}"/>
+            <apex:outputField value="{!Account.BillingPostalCode }"/>
+            <apex:outputField value="{!Account.OwnerId}"/>
+        </apex:pageBlockSection>
+
+        <apex:pageBlockSection title="Display related records via table" columns="1">
+            <apex:pageBlockTable value="{!Account.Contacts}" var="contact">
+                <apex:column >
+                    <apex:outputLink value="{!URLFOR($Action.Contact.Edit, contact.Id)}">Edit Record</apex:outputLink>
+                    &nbsp;
+                    <apex:outputLink value="{!URLFOR($Action.Contact.Delete, contact.Id)}">Delete Record</apex:outputLink>
+                </apex:column>
+                <apex:column value="{!contact.Name}"/>
+                <apex:column value="{!contact.Phone}"/>
+                <apex:column value="{!contact.OwnerId}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Input data using form" columns="1">
+                <apex:inputField value="{!Account.Name}"/>
+                <apex:inputField value="{!Account.Phone}"/>
+                <apex:inputField value="{!Account.BillingPostalCode}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!quicksave}" value="Quick Save"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+
+    <apex:pageBlock title="Static resources test PDP">
+        <apex:pageBlockSection title="Alone picture">
+            <apex:image url="{!$Resource.test_PDP}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Style From Static">
+            <h1>Red color from static</h1>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Picture from zip">
+            <apex:image url="{!URLFOR($Resource.jQueryMobileLight, 'images/icons-png/cloud-black.png')}" width="30" height="20"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+    <apex:form >
+        <apex:pageBlock title="Extension test">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Submit"
+                        reRender="FoundAccounts"
+                        action="{!getAccountByName}"
+                />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Find Account By Name" columns="1">
+                <apex:inputText value="{!name}" label="Account Name Contain"/>
+                <apex:pageBlockTable value="{!foundAccounts}" var="account" id="FoundAccounts">
+                    <apex:column value="{!account.Name}"/>
+                    <apex:column value="{!account.Phone}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+
+    <apex:form >
+        <apex:pageBlock title="JS">
+            <apex:commandButton value="Say Hello To Script" onclick="sayHello();" reRender="none"/>
+        </apex:pageBlock>
+    </apex:form>
+
+    <apex:form >
+        <c:AccountComponentPDP accountToDisplay="{!Account}"/>
+    </apex:form>
+</apex:page>

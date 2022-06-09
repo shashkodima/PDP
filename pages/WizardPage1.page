@@ -1,0 +1,20 @@
+<apex:page id="WizardPage1" controller="WizardController" tabStyle="Account" lightningStylesheets="true" applyBodyTag="false">
+    <apex:sectionHeader title="PDP Wizard" subtitle="Step 1 of 3"/>
+    <apex:slds />
+    <apex:form >
+        <apex:pageBlock title="Account Information" mode="edit">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton styleClass="slds-vf-button_neutral" action="{!cancel}" value="Cancel"/>
+                <apex:commandButton styleClass="slds-vf-button_neutral" action="{!contactPage}" value="Next"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account Information">
+                <apex:inputField value="{!account.Name}"/>
+                <apex:inputField value="{!account.Phone}"/>
+                <apex:inputField value="{!account.BillingPostalCode}"/>
+                <apex:inputField value="{!account.Industry}"/>
+                <apex:inputField value="{!account.ShippingPostalCode}"/>
+                <apex:inputField value="{!account.Description}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,29 @@
+<apex:page id="DashboardPagePDP" standardController="Opportunity" recordSetVar="opportunities">
+    <apex:pageBlock>
+        <apex:form id="formPage">
+            <apex:panelGrid columns="2">
+                <apex:outputLabel value="View:"/>
+                <apex:selectList value="{!filterId}" size="1">
+                    <apex:actionSupport event="onchange" rerender="table"/>
+                    <apex:selectOptions value="{!listViewOptions}"/>
+                </apex:selectList>
+            </apex:panelGrid>
+            <apex:dataTable value="{!opportunities}" var="opp" id="table" cellPadding="4" border="1">
+                <apex:column>
+                    <apex:facet name="header">Name</apex:facet>
+                    <apex:outputText value="{!opp.Name}"/>
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Amount</apex:facet>
+                    <apex:outputText value="{!opp.Amount}"/>
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Account Detail</apex:facet>
+                    <apex:outputPanel>
+                        {!opp.Account.Name}
+                    </apex:outputPanel>
+                </apex:column>
+            </apex:dataTable>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

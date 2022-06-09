@@ -1,0 +1,13 @@
+<apex:component id="AccountComponentPDP">
+    <apex:attribute name="accountToDisplay" description="accountToDisplay" type="Account"/>
+
+    <apex:pageBlock >
+        <apex:pageBlockSection title="PDP Custom component">
+            <apex:outputField value="{!accountToDisplay.Name}"/>
+            <apex:outputField value="{!accountToDisplay.Phone}"/>
+            <apex:outputField value="{!accountToDisplay.BillingPostalCode }"/>
+            <apex:outputField value="{!accountToDisplay.OwnerId}"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+
+</apex:component>

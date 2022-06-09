@@ -1,0 +1,58 @@
+<apex:page id="StandardListControllerPage" standardController="Opportunity" recordSetVar="opportunities">
+    <apex:form >
+        <apex:pageBlock title="Opportunity List with inline edit">
+            List view:
+            &nbsp;
+            <apex:selectList value="{! filterId }" size="1">
+                <apex:selectOptions value="{!listViewOptions}"/>
+                <apex:actionSupport event="onchange" reRender="opportunityTable"/>
+            </apex:selectList>
+            <apex:pageBlockTable value="{!opportunities}" var="opp" id="opportunityTable">
+                <apex:column >
+                    <apex:outputField value="{!opp.Name}"/>
+                    <apex:facet name="header">Name</apex:facet>
+                </apex:column>
+                <apex:column >
+                    <apex:outputField value="{!opp.CloseDate}"/>
+                    <apex:facet name="header">Close Date</apex:facet>
+                </apex:column>
+                <apex:column >
+                    <apex:outputField value="{!opp.Account.Name}"/>
+                    <apex:facet name="header">Client Name</apex:facet>
+                </apex:column>
+                <apex:column >
+                    <apex:outputField value="{!opp.Cargo_weight__c}"/>
+                    <apex:facet name="header">Cargo Weight</apex:facet>
+                </apex:column>
+                <apex:column >
+                    <apex:outputField value="{!opp.From_City__c}"/>
+                    <apex:facet name="header">Start Point City</apex:facet>
+                </apex:column>
+                <apex:column >
+                    <apex:outputField value="{!opp.To_City__c}"/>
+                    <apex:facet name="header">End Point City</apex:facet>
+                </apex:column>
+                <apex:inlineEditSupport event="ondblClick"/>
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!quicksave}" id="saveButton"/>
+            </apex:pageBlockButtons>
+            Current Page :
+            &nbsp;
+            <apex:outputText value="{!PageNumber} of {!CEILING(ResultSize / PageSize)}"/>
+            &nbsp;
+            <apex:commandLink action="{!previous}" value="<<Previous Page" rendered="{!HasPrevious}"/>
+            &nbsp;
+            <apex:commandLink action="{!next}" value="Next Page>>" rendered="{! HasNext }"/>
+            &nbsp;
+            Records per page:
+            <apex:selectList value="{!PageSize}" size="1">
+                <apex:selectOption itemValue="3" itemLabel="3"/>
+                <apex:selectOption itemValue="5" itemLabel="5"/>
+                <apex:selectOption itemValue="10" itemLabel="10"/>
+                <apex:selectOption itemValue="20" itemLabel="20"/>
+                <apex:actionSupport event="onchange" reRender="opportunityTable"/>
+            </apex:selectList>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
