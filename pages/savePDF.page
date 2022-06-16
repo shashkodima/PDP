@@ -1,0 +1,17 @@
+<apex:page standardController="Account" extensions="ControllerSavePDF" contentType="{!renderedContentType}" renderAs="{!renderingService}">
+    <apex:form>
+        <apex:pageBlock title="Account Data">
+            <apex:pageBlockSection columns="1">
+                <apex:outputField value="{!Account.Name}" title="Name"/>
+                <apex:outputField value="{!Account.Phone}" title="Phone"/>
+                <apex:outputField value="{!Account.OwnerId}" title="Contact Owner"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection  rendered="{!renderingService != 'pdf'}">
+                <apex:inputText label="PDF file name" value="{!renderedFileName}" id="fileName"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom"  rendered="{!renderingService != 'pdf'}">
+                <apex:commandButton value="Download PDF" action="{!savePDF}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
